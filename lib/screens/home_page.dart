@@ -57,6 +57,15 @@ class _HomePage extends State<HomePage> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Image.asset(
+                          card['image'],
+                          height: 380,
+                          width: 240,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -70,7 +79,8 @@ class _HomePage extends State<HomePage> {
                             child: const Text('Start playing'),
                           ),
                         ],
-                      )
+                      ),
+                      const SizedBox(height: 8),
                     ],
                   ),
                 ),

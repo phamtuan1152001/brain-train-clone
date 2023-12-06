@@ -57,15 +57,17 @@ class _HomePage extends State<HomePage> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 8),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Image.asset(
                           card['image'],
-                          height: 380,
-                          width: 240,
+                          height: 100,
+                          width: 100,
                           fit: BoxFit.contain,
                         ),
                       ),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[

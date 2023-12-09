@@ -1,11 +1,12 @@
+import 'package:brain_train_clone_app/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:brain_train_clone_app/constants/mock_data.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+  const HomePage({super.key});
 
-  final String title;
+  // final String title;
 
   @override
   State<HomePage> createState() => _HomePage();
@@ -77,7 +78,9 @@ class _HomePage extends State<HomePage> {
                                 // padding: const EdgeInsets.all(16.0),
                                 // textStyle: const TextStyle(fontSize: 20),
                                 backgroundColor: HexColor("#8c7851")),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(card['pathName']);
+                            },
                             child: const Text('Start playing'),
                           ),
                         ],

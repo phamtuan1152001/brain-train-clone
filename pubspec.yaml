@@ -37,6 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   hexcolor: ^3.0.1
   carousel_slider: ^4.2.1
+  http: ^0.13.6
+  fluttertoast: ^8.2.4
+  flutter_riverpod: ^2.3.7
+  liquid_swipe: ^3.1.0
+  smooth_page_indicator: ^1.1.0
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
@@ -61,23 +67,24 @@ flutter:
   uses-material-design: true
 
   assets:
-    # - assets/
+    - assets/
     - images/
-    # - assets/gif/
+    - lib/data/list_letters.json
+    - assets/gif/
+    - assets/images/
+    - assets/Animal/
+    - assets/Fruit/
+    - assets/Household/
+    - assets/Transportation/
+    - assets/images/weapon/
+    - assets/images/enemy/
+    - assets/weaponParams.json
+    - assets/enemyParams.json
+    - assets/images/Attention/Question/
+    - assets/images/Attention/Solution/
     # - lib/data/data_language/question_languages_one.json
     # - lib/data/data_language/question_languages_two.json
     # - lib/data/data_language/word.json
-    # - assets/images/
-    # - assets/Animal/
-    # - assets/Fruit/
-    # - assets/Household/
-    # - assets/Transportation/
-    # - assets/images/weapon/
-    # - assets/images/enemy/
-    # - assets/weaponParams.json
-    # - assets/enemyParams.json
-    # - assets/images/Attention/Question/
-    # - assets/images/Attention/Solution/
     # - lib/data/data_attention/game_one_attention.json
 
   # To add assets to your application, add an assets section, like this:

@@ -45,7 +45,7 @@ class MockData {
       "paddingTop": 45,
       "padding": 0,
       "color": 0xff2D2D2D,
-      "pathName": "/gameLetter"
+      "pathName": "/findWords"
     },
     {
       "id": 2,
@@ -57,7 +57,7 @@ class MockData {
       "paddingTop": 45,
       "padding": 0,
       "color": 0xff444444,
-      "pathName": "/gameWord"
+      "pathName": "/nextWords"
     },
     {
       "id": 3,
@@ -69,7 +69,7 @@ class MockData {
       "paddingTop": 45,
       "padding": 0,
       "color": 0xff444444,
-      "pathName": "/gameConj"
+      "pathName": "/connectWords"
     },
     {
       "id": 4,
@@ -81,7 +81,9 @@ class MockData {
       "paddingTop": 45,
       "padding": 0,
       "color": 0xff444444,
-      "pathName": "/gameSort"
+      "pathName": "/arrangeWords"
     },
   ];
+
+  String validlanguagesUrl = 'https://api-mobile-xi.vercel.app/check';
 }

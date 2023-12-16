@@ -27,7 +27,7 @@ class FindWordsPage extends StatefulWidget {
 
 class _FindWordsPage extends State<FindWordsPage> {
   String listLetter = 'data/list_letters.json';
-  final int answerDurationInSeconds = 20;
+  final int answerDurationInSeconds = 50;
   List<String> _firstLetter = [""];
   String firstLetter = "";
   String wordInput = "";
@@ -41,6 +41,7 @@ class _FindWordsPage extends State<FindWordsPage> {
   Timer? countdownTimer;
   int numberWord = 0;
   int currentPage = 0;
+  List<String> listSuccess = [""];
   // PageController _pageController = PageController(initialPage: 0);
   TextEditingController controllerInput = TextEditingController();
   Duration answerDuration = const Duration();
@@ -105,7 +106,7 @@ class _FindWordsPage extends State<FindWordsPage> {
     String checkingWord = "$firstLetter$userAnswer";
     numberWord = _firstLetter.length - 1;
     bool isValidWord = await checkValidWord(checkingWord);
-    bool isMatchWord = await checkMatchWord(checkingWord, firstLetter);
+    bool isMatchWord = await checkMatchWord(userAnswer, _firstLetter);
     if (!isMatchWord) {
       showToastErrorMatch();
     }
@@ -114,6 +115,7 @@ class _FindWordsPage extends State<FindWordsPage> {
     }
 
     if (isValidWord && isMatchWord) {
+      listSuccess.add(userAnswer);
       if (checkingWord.length == 2) {
         setState(() {
           _firstLetter.add(userAnswer);
@@ -187,7 +189,7 @@ class _FindWordsPage extends State<FindWordsPage> {
             title: title,
             content: content,
             callback: callback,
-            numberWord: numberWord));
+            numberWord: listSuccess.length - 1));
   }
 
   Future<bool?> displayMyDiaglog(BuildContext context) {

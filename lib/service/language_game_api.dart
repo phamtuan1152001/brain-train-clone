@@ -1,6 +1,3 @@
-// import 'package:flutter/services.dart';
-// import 'dart:math';
-
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -27,15 +24,3 @@ Future<bool> checkMatchWord(controllerInput, firstLetter) async {
   }
   return true;
 }
-
-// Future<void> fetchRandomCharacter(listLetter, currentIndex, VoidCallback setState) async {
-//   final String response = await rootBundle.loadString(listLetter);
-//   final data = await json.decode(response);
-//   currentIndex = Random().nextInt(data["letter"].length);
-//   setState(() {
-//     String firstCharacter = data["letter"][currentIndex].split(' ')[0];
-//     _firstLetter.add(firstCharacter);
-//     firstLetter = _firstLetter[1];
-//     letterList = data["letter"];
-//   });
-// }

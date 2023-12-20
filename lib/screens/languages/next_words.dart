@@ -168,58 +168,6 @@ class _NextWordsPage extends State<NextWordsPage> {
     );
   }
 
-  Future<void> _dialogBuilderTwo(BuildContext context) {
-    final obController = OnBoardingLanguageTwo();
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => WillPopScope(
-        onWillPop: () async {
-          // final isBack = await displayMyDialog(context);
-          return false;
-        },
-        child: Scaffold(
-          body: Stack(
-            alignment: Alignment.center,
-            children: [
-              LiquidSwipe(
-                pages: obController.pages,
-                enableSideReveal: true,
-                liquidController: obController.controller,
-                onPageChangeCallback: obController.onPageChangedCallback,
-                slideIconWidget: const Icon(Icons.arrow_back_ios),
-                waveType: WaveType.liquidReveal,
-              ),
-              Positioned(
-                top: 50,
-                right: 20,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    stopTime = false;
-                  },
-                  child:
-                      const Text("Skip", style: TextStyle(color: Colors.grey)),
-                ),
-              ),
-              Obx(
-                () => Positioned(
-                  bottom: 10,
-                  child: AnimatedSmoothIndicator(
-                    count: 3,
-                    activeIndex: obController.currentPage.value,
-                    effect: const ExpandingDotsEffect(
-                      activeDotColor: Color(0xff272727),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -235,23 +183,6 @@ class _NextWordsPage extends State<NextWordsPage> {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              const Positioned(
-                left: -290,
-                right: -5,
-                child: Image(
-                  image: AssetImage('assets/images/cat.gif'),
-                  height: 200,
-                  width: 400,
-                  //   width:400,
-                ),
-              ),
-
-              // SvgPicture.asset(
-              //   'assets/images/business-lady-do-multi-tasking.svg',
-              //   // fit: BoxFit.fitHeight,
-              //   height:200,
-              //   width:400,
-              // ),
               Column(
                 children: [
                   Expanded(
@@ -298,43 +229,6 @@ class _NextWordsPage extends State<NextWordsPage> {
                                             icon: const Icon(
                                               Icons.arrow_circle_left_outlined,
                                               size: 40,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              stopTime = true;
-                                              handleTimeEnd();
-                                            },
-                                            icon: const Icon(
-                                              Icons.flag_circle_rounded,
-                                              size: 40,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              _dialogBuilderTwo(context);
-                                              stopTime = true;
-                                            },
-                                            icon: const Icon(
-                                              Icons.question_mark_rounded,
-                                              size: 35,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              stopTime = true;
-                                              _dialogBuilderTwo(context);
-                                            },
-                                            icon: const Icon(
-                                              Icons.settings,
-                                              size: 35,
                                             ),
                                             color: Colors.black,
                                           ),

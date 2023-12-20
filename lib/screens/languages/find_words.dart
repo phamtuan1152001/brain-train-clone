@@ -169,58 +169,6 @@ class _FindWordsPage extends State<FindWordsPage> {
     );
   }
 
-  Future<void> _dialogBuilderTwo(BuildContext context) {
-    final obController = OnBoardingController();
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => WillPopScope(
-        onWillPop: () async {
-          // final isBack = await showMyDialog(context);
-          return false;
-        },
-        child: Scaffold(
-          body: Stack(
-            alignment: Alignment.center,
-            children: [
-              LiquidSwipe(
-                pages: obController.pages,
-                enableSideReveal: true,
-                liquidController: obController.controller,
-                onPageChangeCallback: obController.onPageChangedCallback,
-                slideIconWidget: const Icon(Icons.arrow_back_ios),
-                waveType: WaveType.liquidReveal,
-              ),
-              Positioned(
-                top: 50,
-                right: 20,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    stopTime = false;
-                  },
-                  child:
-                      const Text("Skip", style: TextStyle(color: Colors.grey)),
-                ),
-              ),
-              Obx(
-                () => Positioned(
-                  bottom: 10,
-                  child: AnimatedSmoothIndicator(
-                    count: 3,
-                    activeIndex: obController.currentPage.value,
-                    effect: const ExpandingDotsEffect(
-                      activeDotColor: Color(0xff272727),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -288,45 +236,8 @@ class _FindWordsPage extends State<FindWordsPage> {
                                             ),
                                             color: Colors.black,
                                           ),
-                                          IconButton(
-                                            onPressed: () {
-                                              stopTime = true;
-                                              handleTimeEnd();
-                                            },
-                                            icon: const Icon(
-                                              Icons.flag_circle_rounded,
-                                              size: 40,
-                                            ),
-                                            color: Colors.black,
-                                          ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              _dialogBuilderTwo(context);
-                                              stopTime = true;
-                                            },
-                                            icon: const Icon(
-                                              Icons.question_mark_rounded,
-                                              size: 35,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              stopTime = true;
-                                              handleTimeEnd();
-                                            },
-                                            icon: const Icon(
-                                              Icons.settings,
-                                              size: 35,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      )
                                     ],
                                   ),
                                 ),

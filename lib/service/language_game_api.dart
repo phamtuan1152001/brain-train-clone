@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:brain_train_clone_app/constants/mock_data.dart';
 
@@ -23,4 +24,10 @@ Future<bool> checkMatchWord(controllerInput, firstLetter) async {
     }
   }
   return true;
+}
+
+Future<Map<String, dynamic>> fetchRandomCharacter(listWord) async {
+  final String response = await rootBundle.loadString(listWord);
+  final result = await json.decode(response);
+  return result;
 }

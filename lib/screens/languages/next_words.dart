@@ -101,7 +101,7 @@ class _NextWordsPage extends State<NextWordsPage> {
   }
 
   void randomCharacter() async {
-    final data = await fetchRandomCharacter(listWord);
+    final data = await fetchRandomWord(listWord);
     currentIndex = Random().nextInt(data["word"].length);
 
     setState(() {

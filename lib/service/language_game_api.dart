@@ -26,8 +26,14 @@ Future<bool> checkMatchWord(controllerInput, firstLetter) async {
   return true;
 }
 
-Future<Map<String, dynamic>> fetchRandomCharacter(listWord) async {
-  final String response = await rootBundle.loadString(listWord);
+Future<Map<String, dynamic>> fetchRandomLetter(listData) async {
+  final String response = await rootBundle.loadString(listData);
+  final result = await json.decode(response);
+  return result;
+}
+
+Future<Map<String, dynamic>> fetchRandomWord(listData) async {
+  final String response = await rootBundle.loadString(listData);
   final result = await json.decode(response);
   return result;
 }

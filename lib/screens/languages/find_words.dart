@@ -1,19 +1,21 @@
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'package:brain_train_clone_app/screens/languages/common/index.dart';
+// import 'package:flutter/services.dart';
 import 'dart:math';
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:brain_train_clone_app/service/language_game_api.dart'
-    show checkValidWord, checkMatchWord;
+    show fetchRandomLetter;
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // @components
-import 'package:brain_train_clone_app/components/toast.dart';
+// import 'package:brain_train_clone_app/components/toast.dart';
 import 'package:brain_train_clone_app/components/languages/notification.dart';
 import 'package:brain_train_clone_app/data/data_onborad/data_languages_1.dart';
+import '../../components/languages/alert.dart';
 
 // @common
 import 'package:brain_train_clone_app/common/light_colors.dart';
@@ -33,7 +35,7 @@ class _FindWordsPage extends State<FindWordsPage> {
   String wordInput = "";
   int statusCode = 0;
   bool stopTime = false;
-  bool back = false;
+  bool isBack = false;
   int reduceSecondsBy = 1;
   int score = 0;
   int currentIndex = 0;
@@ -49,8 +51,8 @@ class _FindWordsPage extends State<FindWordsPage> {
   @override
   void initState() {
     super.initState();
-    fetchRandomCharacter();
-    startTimer();
+    randomCharacter();
+    handleStartTimer();
   }
 
   @override
@@ -60,7 +62,7 @@ class _FindWordsPage extends State<FindWordsPage> {
     controllerInput.dispose();
   }
 
-  void setEndTimer() {
+  void handleTimeEnd() {
     countdownTimer!.cancel();
     displayNotification("HẾT GIỜ", "$score", () {
       Navigator.of(context).pop();
@@ -70,14 +72,14 @@ class _FindWordsPage extends State<FindWordsPage> {
         _firstLetter = [''];
         firstLetter = "";
         wordInput = "";
-        fetchRandomCharacter();
+        randomCharacter();
         controllerInput.clear();
-        startTimer();
+        handleStartTimer();
       });
     });
   }
 
-  void setCountDown() {
+  void handleCountDown() {
     if (stopTime == false) {
       reduceSecondsBy = 1;
     } else {
@@ -86,90 +88,52 @@ class _FindWordsPage extends State<FindWordsPage> {
     setState(() {
       final seconds = answerDuration.inSeconds - reduceSecondsBy;
       if (seconds < 0) {
-        setEndTimer();
+        handleTimeEnd();
       } else {
         answerDuration = Duration(seconds: seconds);
       }
     });
   }
 
-  void startTimer() {
+  void handleStartTimer() {
     answerDuration = Duration(seconds: answerDurationInSeconds);
 
     countdownTimer =
-        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => handleCountDown());
   }
 
-  void handleClickCheck() async {
+  void onSubmit() async {
     String userAnswer = controllerInput.text;
     String firstLetter = _firstLetter[1];
     String checkingWord = "$firstLetter$userAnswer";
     numberWord = _firstLetter.length - 1;
-    bool isValidWord = await checkValidWord(checkingWord);
-    bool isMatchWord = await checkMatchWord(userAnswer, _firstLetter);
-    if (!isMatchWord) {
-      showToastErrorMatch();
-    }
-    if (!isValidWord) {
-      showToastError();
+
+    bool success = await handleCheck(
+        userAnswer: userAnswer,
+        userInput: firstLetter,
+        numberWord: numberWord,
+        checkingWord: checkingWord,
+        ans: _firstLetter,
+        listSuccess: listSuccess);
+
+    if (success) {
+      score += 200;
     }
 
-    if (isValidWord && isMatchWord) {
-      listSuccess.add(userAnswer);
-      if (checkingWord.length == 2) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 200;
-          showToastCorrect("+ 200");
-        });
-      } else if (checkingWord.length == 3) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 300;
-          showToastCorrect("+ 300");
-        });
-      } else if (checkingWord.length == 4) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 400;
-          showToastCorrect("+ 400");
-        });
-      } else if (checkingWord.length == 5) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 500;
-          showToastCorrect("+ 500");
-        });
-      } else if (checkingWord.length == 6) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 600;
-          showToastCorrect("+ 600");
-        });
-      } else if (checkingWord.length == 7) {
-        setState(() {
-          _firstLetter.add(userAnswer);
-          score += 700;
-          showToastCorrect("+ 700");
-        });
-      }
-    }
     setState(() {
       controllerInput.clear();
       wordInput = "";
     });
   }
 
-  void handleCheckResult() {
+  void checkResult() {
     if (wordInput.isNotEmpty) {
-      handleClickCheck();
+      onSubmit();
     }
   }
 
-  // asyn function
-  Future<void> fetchRandomCharacter() async {
-    final String response = await rootBundle.loadString(listLetter);
-    final data = await json.decode(response);
+  void randomCharacter() async {
+    final data = await fetchRandomLetter(listLetter);
     currentIndex = Random().nextInt(data["letter"].length);
     setState(() {
       String firstCharacter = data["letter"][currentIndex].split(' ')[0];
@@ -178,7 +142,6 @@ class _FindWordsPage extends State<FindWordsPage> {
       letterList = data["letter"];
     });
   }
-  // end
 
   Future<void> displayNotification(
       String title, String content, Function callback) async {
@@ -196,24 +159,11 @@ class _FindWordsPage extends State<FindWordsPage> {
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Bạn có muốn thoát ra ?'),
-          actions: [
-            TextButton(
-              child: const Text('Không'),
-              onPressed: () {
-                back = false;
-                Navigator.pop(context, back);
-              },
-            ),
-            TextButton(
-              child: const Text('Có'),
-              onPressed: () {
-                back = true;
-                Navigator.pop(context, back);
-              },
-            ),
-          ],
+        return AlertComponents(
+          questionText: "Bạn có muốn thoát ra ?",
+          yesText: "Có",
+          noText: "Không",
+          flag: isBack,
         );
       },
     );
@@ -225,7 +175,7 @@ class _FindWordsPage extends State<FindWordsPage> {
       context: context,
       builder: (BuildContext context) => WillPopScope(
         onWillPop: () async {
-          // final back = await showMyDialog(context);
+          // final isBack = await showMyDialog(context);
           return false;
         },
         child: Scaffold(
@@ -275,8 +225,8 @@ class _FindWordsPage extends State<FindWordsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final back = await displayMyDiaglog(context);
-        return back ?? false;
+        final isBack = await displayMyDiaglog(context);
+        return isBack ?? false;
       },
       child: Scaffold(
         body: Container(
@@ -325,11 +275,11 @@ class _FindWordsPage extends State<FindWordsPage> {
                                         children: [
                                           IconButton(
                                             onPressed: () async {
-                                              final back =
+                                              final isBack =
                                                   await displayMyDiaglog(
                                                       context);
-                                              if (back == true) {
-                                                Navigator.pop(context, back);
+                                              if (isBack == true) {
+                                                Navigator.pop(context, isBack);
                                               }
                                             },
                                             icon: const Icon(
@@ -341,7 +291,7 @@ class _FindWordsPage extends State<FindWordsPage> {
                                           IconButton(
                                             onPressed: () {
                                               stopTime = true;
-                                              setEndTimer();
+                                              handleTimeEnd();
                                             },
                                             icon: const Icon(
                                               Icons.flag_circle_rounded,
@@ -367,7 +317,7 @@ class _FindWordsPage extends State<FindWordsPage> {
                                           IconButton(
                                             onPressed: () {
                                               stopTime = true;
-                                              setEndTimer();
+                                              handleTimeEnd();
                                             },
                                             icon: const Icon(
                                               Icons.settings,
@@ -553,7 +503,7 @@ class _FindWordsPage extends State<FindWordsPage> {
                             padding: const EdgeInsets.only(top: 10),
                             child: ElevatedButton(
                               onPressed: () {
-                                handleCheckResult();
+                                checkResult();
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.yellow[600],

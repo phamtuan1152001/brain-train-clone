@@ -86,4 +86,11 @@ class MockData {
   ];
 
   String validlanguagesUrl = 'https://api-mobile-xi.vercel.app/check';
+
+  static List<Map<String, dynamic>> listWords = [
+    {"result": "đấtnước", "arrange": "cấntưđớ", "count": 7},
+    {"result": "điệnảnh", "arrange": "nảniệđh", "count": 7},
+    {"result": "cúsốc", "arrange": "súccố", "count": 5},
+    {"result": "concua", "arrange": "accoun", "count": 6},
+  ];
 }

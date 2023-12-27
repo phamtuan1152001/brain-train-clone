@@ -69,7 +69,7 @@ flutter:
   assets:
     - assets/
     - images/
-    - lib/data/list_letters.json
+    - assets/data/list_letters.json
     - assets/gif/
     - assets/images/
     - assets/Animal/

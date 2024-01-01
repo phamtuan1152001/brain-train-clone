@@ -43,6 +43,9 @@ dependencies:
   liquid_swipe: ^3.1.0
   smooth_page_indicator: ^1.1.0
   get: ^4.6.5
+  lottie: ^2.7.0
+  animated_text_kit: ^4.2.2
+  quickalert: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +85,7 @@ flutter:
     - assets/enemyParams.json
     - assets/images/Attention/Question/
     - assets/images/Attention/Solution/
+    - assets/math/
     # - lib/data/data_language/question_languages_one.json
     # - lib/data/data_language/question_languages_two.json
     # - lib/data/data_language/word.json

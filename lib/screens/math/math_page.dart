@@ -1,5 +1,5 @@
+import 'package:brain_train_clone_app/router/routers.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class MathPage extends StatefulWidget {
   const MathPage({super.key});
@@ -12,24 +12,36 @@ class _MathPage extends State<MathPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: HexColor("#fffffe"),
-          child: ListView(
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text(
-                  'CHỌN TRÒ CHƠI MathPage',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: 25, letterSpacing: 1),
-                ),
-              )
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(RouteGenerator.homePage);
+          },
+          child: Image.asset(
+            'assets/math/go-back.png',
+            scale: 2.5,
           ),
+        ),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(RouteGenerator.smaller);
+              },
+              child: const Text('Game 1'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
+              },
+              child: const Text('Game 2'),
+            ),
+          ],
         ),
       ),
     );

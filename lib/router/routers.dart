@@ -10,6 +10,13 @@ import 'package:brain_train_clone_app/screens/languages/next_words.dart';
 import 'package:brain_train_clone_app/screens/languages/connect_words.dart';
 import 'package:brain_train_clone_app/screens/languages/arrange_words.dart';
 
+// list page of math game
+import 'package:brain_train_clone_app/screens/math/game1_screens/game1_screen.dart';
+import 'package:brain_train_clone_app/screens/math/game1_screens/g1_congrat_screen.dart';
+import 'package:brain_train_clone_app/screens/math/game2_screens/g2_levels_screen.dart';
+import 'package:brain_train_clone_app/screens/math/game2_screens/game2_screen.dart';
+import 'package:brain_train_clone_app/screens/math/game2_screens/g2_congrat_screen.dart';
+
 class RouteGenerator {
   const RouteGenerator._();
 
@@ -31,6 +38,11 @@ class RouteGenerator {
 
   // math page
   static const mathPage = '/mathPage';
+  static const smaller = '/smaller';
+  static const smallerResult = '/smallerResult';
+  static const sumLevels = '/sumLevels';
+  static const sum = '/sum';
+  static const sumResult = '/sumResult';
 
   static final routes = {
     homePage: (context) => const HomePage(),
@@ -44,5 +56,12 @@ class RouteGenerator {
     nextWords: (context) => const NextWordsPage(),
     connectWords: (context) => const ConnectWordsPage(),
     arrangeWords: (context) => const ArrangeWordsPage(),
+
+    // list game of math
+    smaller: (context) => const Math1Screen(),
+    smallerResult: (context) => const Math1CongratScreen(),
+    sumLevels: (context) => const Math2LevelsScreen(),
+    sum: (context) => const Math2Screen(),
+    sumResult: (context) => const Math2CongratScreen(),
   };
 }

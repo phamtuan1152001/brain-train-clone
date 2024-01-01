@@ -1,6 +1,7 @@
 import 'package:brain_train_clone_app/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:brain_train_clone_app/screens/home/home_page.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

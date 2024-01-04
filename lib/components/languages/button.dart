@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   const Button({
     Key? key,
-    this.color = const Color.fromARGB(255, 187, 233, 24),
+    this.color = const Color(0xFF5CB67F),
     this.textColor = Colors.white,
     required this.onPressed,
     required this.text,

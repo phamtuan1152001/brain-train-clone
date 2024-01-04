@@ -169,16 +169,15 @@ class _FindWordsPage extends State<FindWordsPage> {
                           vertical: 16, horizontal: 16),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 230, 209, 24),
-                            Color.fromARGB(255, 227, 241, 28)
-                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
+                          colors: [
+                            Color(0xFF97E8B5),
+                            Color(0xFF5CB67F),
+                          ],
+                          stops: [0.0, 1.0],
+                          transform: GradientRotation(
+                              220.55 * (3.141592653589793 / 180.0)),
                         ),
                       ),
                       child: Scaffold(

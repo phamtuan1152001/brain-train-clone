@@ -23,15 +23,18 @@ class NotificationComponents extends StatelessWidget {
         Center(
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 50),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              gradient: const LinearGradient(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-                  Color.fromARGB(255, 230, 209, 24),
-                  Color.fromARGB(255, 227, 241, 28)
+                  Color(0xFF97E8B5),
+                  Color(0xFF5CB67F),
                 ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                stops: [0.0, 1.0],
+                transform:
+                    GradientRotation(220.55 * (3.141592653589793 / 180.0)),
               ),
             ),
             child: Stack(
@@ -47,6 +50,7 @@ class NotificationComponents extends StatelessWidget {
                               color: Colors.red,
                               decoration: TextDecoration.none),
                           textAlign: TextAlign.center),
+                      const SizedBox(height: 20),
                       Text(
                         "Số từ đúng: $numberWord",
                         textAlign: TextAlign.center,
@@ -72,17 +76,13 @@ class NotificationComponents extends StatelessWidget {
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
-                                Image.asset(
-                                  'images/poly-twist-knots.png',
-                                  width: 170,
-                                ),
                                 Text(
                                   content,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 30,
+                                      fontSize: 60,
                                       decoration: TextDecoration.none),
                                 ),
                               ],

@@ -11,6 +11,7 @@ import 'package:brain_train_clone_app/components/header_game.dart';
 // @common
 import 'package:brain_train_clone_app/common/light_colors.dart';
 import 'package:brain_train_clone_app/constants/mock_data.dart';
+import '../../components/languages/button.dart';
 import '../../service/language_game_api.dart';
 
 class NextWordsPage extends StatefulWidget {
@@ -284,23 +285,13 @@ class _NextWordsPage extends State<NextWordsPage> {
                           ),
                         ),
                         Padding(
-                            padding: const EdgeInsets.only(top: 20, bottom: 10),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                checkResult();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 187, 233, 24),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 14),
-                                  textStyle: const TextStyle(fontSize: 24)),
-                              child: const Text('Submit',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 20)),
-                            )),
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Button(
+                            padding: 20,
+                            text: 'Gửi',
+                            onPressed: () => checkResult(),
+                          ),
+                        ),
                       ],
                     ),
                   ),

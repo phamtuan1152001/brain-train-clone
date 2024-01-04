@@ -4,6 +4,7 @@ import 'package:brain_train_clone_app/components/header_game.dart';
 import 'package:flutter/material.dart';
 import 'package:brain_train_clone_app/constants/mock_data.dart';
 
+import '../../components/languages/button.dart';
 import '../../components/languages/notification.dart';
 import '../../components/toast.dart';
 import '../../service/language_game_api.dart';
@@ -408,21 +409,13 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: controller.text.isNotEmpty
-                            ? () => onSubmit()
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 187, 233, 24),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 14),
-                            textStyle: const TextStyle(fontSize: 24)),
-                        child: const Text('Submit'),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Button(
+                      padding: 20,
+                      text: 'Gửi',
+                      onPressed: () => onSubmit(),
+                    ),
                   ),
                 ],
               ),

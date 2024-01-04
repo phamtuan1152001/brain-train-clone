@@ -37,7 +37,6 @@ class _FindWordsPage extends State<FindWordsPage> {
   int numberWord = 0;
   int currentPage = 0;
   List<String> listSuccess = [""];
-  // PageController _pageController = PageController(initialPage: 0);
   TextEditingController controllerInput = TextEditingController();
   Duration answerDuration = const Duration();
 

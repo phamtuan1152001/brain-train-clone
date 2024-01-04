@@ -37,7 +37,7 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
   void initState() {
     super.initState();
     firstCharacter = randomCharacter();
-    startTimer();
+    handleStartTime();
   }
 
   @override
@@ -47,7 +47,7 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
     controller.dispose();
   }
 
-  void startTimer() {
+  void handleStartTime() {
     answerDuration = Duration(seconds: answerDurationInSeconds);
 
     countdownTimer =
@@ -63,7 +63,7 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
     setState(() {
       final seconds = answerDuration.inSeconds - reduceSecondsBy;
       if (seconds < 0) {
-        setEndTimer();
+        handleTimeEnd();
         // changeStatus(GameStatus.end);
       } else {
         answerDuration = Duration(seconds: seconds);
@@ -71,7 +71,7 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
     });
   }
 
-  void setEndTimer() {
+  void handleTimeEnd() {
     countdownTimer!.cancel();
     displayNotification("Hết giờ", "$_point", () {
       Navigator.of(context).pop();
@@ -86,7 +86,7 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
         ];
         randomCharacter();
         controller.clear();
-        startTimer();
+        handleStartTime();
       });
     });
   }
@@ -141,28 +141,9 @@ class _ConnectWordsPage extends State<ConnectWordsPage> {
     controller.text = '';
   }
 
-  // Future<bool?> displayMyDialog(BuildContext context) {
-  //   return showDialog<bool>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertComponents(
-  //         questionText: "Bạn có muốn thoát ra ?",
-  //         yesText: "Có",
-  //         noText: "Không",
-  //         flag: isBack,
-  //       );
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final seconds = answerDuration.inSeconds;
     return Container(
-      // onWillPop: () async {
-      //   final isBack = await displayMyDialog(context);
-      //   return isBack ?? false;
-      // },
       child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(

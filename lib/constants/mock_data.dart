@@ -1,5 +1,5 @@
 class MockData {
-  static int time = 200;
+  static int time = 20;
 
   static List<Map<String, dynamic>> cards = [
     {

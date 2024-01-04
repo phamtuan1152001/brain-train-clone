@@ -20,22 +20,16 @@ class NotificationComponents extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         const SizedBox(height: 100),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(title,
-              style: const TextStyle(
-                  fontSize: 40,
-                  color: Colors.red,
-                  decoration: TextDecoration.none),
-              textAlign: TextAlign.center),
-        ),
         Center(
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 50),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               gradient: const LinearGradient(
-                colors: [Color(0xFFFFF9C4), Color(0xFFF9A825)],
+                colors: [
+                  Color.fromARGB(255, 230, 209, 24),
+                  Color.fromARGB(255, 227, 241, 28)
+                ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -47,6 +41,12 @@ class NotificationComponents extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(title,
+                          style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.red,
+                              decoration: TextDecoration.none),
+                          textAlign: TextAlign.center),
                       Text(
                         "Số từ đúng: $numberWord",
                         textAlign: TextAlign.center,

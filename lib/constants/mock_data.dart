@@ -1,4 +1,6 @@
 class MockData {
+  static int time = 200;
+
   static List<Map<String, dynamic>> cards = [
     {
       "id": 1,
@@ -8,16 +10,16 @@ class MockData {
       "description": '4 Trò Chơi',
       "pathName": '/languagePage'
     },
+    // {
+    //   "id": 2,
+    //   "image": 'images/attention-background.png',
+    //   "icon": 'images/attention-icon.png',
+    //   "title": 'Trò Chơi Tập Trung',
+    //   "description": '4 Trò Chơi',
+    //   "pathName": '/attentionPage'
+    // },
     {
       "id": 2,
-      "image": 'images/attention-background.png',
-      "icon": 'images/attention-icon.png',
-      "title": 'Trò Chơi Tập Trung',
-      "description": '4 Trò Chơi',
-      "pathName": '/attentionPage'
-    },
-    {
-      "id": 3,
       "image": 'images/memory-background.png',
       "icon": 'images/memory.png',
       "title": 'Trò Chơi Ghi Nhớ',
@@ -25,7 +27,7 @@ class MockData {
       "pathName": '/memoryPage'
     },
     {
-      "id": 4,
+      "id": 3,
       "image": 'images/math-background.png',
       "icon": 'images/math-icon.jpg',
       "title": 'Trò Chơi Tính Toán',
@@ -71,18 +73,18 @@ class MockData {
       "color": 0xff444444,
       "pathName": "/connectWords"
     },
-    {
-      "id": 4,
-      "image": 'images/game_languages4.png',
-      "icon": 'images/game_languages4.png',
-      "title": 'Sắp xếp từ',
-      "description": '',
-      "paddingLeft": 7,
-      "paddingTop": 45,
-      "padding": 0,
-      "color": 0xff444444,
-      "pathName": "/arrangeWords"
-    },
+    // {
+    //   "id": 4,
+    //   "image": 'images/game_languages4.png',
+    //   "icon": 'images/game_languages4.png',
+    //   "title": 'Sắp xếp từ',
+    //   "description": '',
+    //   "paddingLeft": 7,
+    //   "paddingTop": 45,
+    //   "padding": 0,
+    //   "color": 0xff444444,
+    //   "pathName": "/arrangeWords"
+    // },
   ];
 
   String validlanguagesUrl = 'https://api-mobile-xi.vercel.app/check';

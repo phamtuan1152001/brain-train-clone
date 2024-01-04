@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
-// import 'package:hexcolor/hexcolor.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
 import 'dart:math';
-import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:brain_train_clone_app/screens/languages/common/index.dart'
     show handleCheck;
-import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // @components
 import 'package:brain_train_clone_app/components/languages/notification.dart';
-import 'package:brain_train_clone_app/data/data_onborad/data_languages_2.dart';
-import 'package:brain_train_clone_app/components/languages/alert.dart';
+import 'package:brain_train_clone_app/components/header_game.dart';
 
 // @common
 import 'package:brain_train_clone_app/common/light_colors.dart';
-
+import 'package:brain_train_clone_app/constants/mock_data.dart';
 import '../../service/language_game_api.dart';
 
 class NextWordsPage extends StatefulWidget {
@@ -30,7 +22,7 @@ class NextWordsPage extends StatefulWidget {
 
 class _NextWordsPage extends State<NextWordsPage> {
   String listWord = "data/list_words.json";
-  final int answerDurationInSeconds = 20;
+  final int answerDurationInSeconds = MockData.time;
   List<String> _firstWord = [""];
   int currentIndex = 0;
   List wordList = [];
@@ -44,7 +36,7 @@ class _NextWordsPage extends State<NextWordsPage> {
   int numberWord = 0;
   String firstWord = "";
   TextEditingController controllerInput = TextEditingController();
-  Duration timeDuration = const Duration();
+  Duration answerDuration = const Duration();
   List<String> listSuccess = [""];
 
   @override
@@ -66,7 +58,7 @@ class _NextWordsPage extends State<NextWordsPage> {
     displayNotification("Hết giờ", "$score", () {
       Navigator.of(context).pop();
       setState(() {
-        timeDuration = const Duration();
+        answerDuration = const Duration();
         score = 0;
         _firstWord = [''];
         firstWord = "";
@@ -85,17 +77,17 @@ class _NextWordsPage extends State<NextWordsPage> {
       reduceSecondsBy = 0;
     }
     setState(() {
-      final seconds = timeDuration.inSeconds - reduceSecondsBy;
+      final seconds = answerDuration.inSeconds - reduceSecondsBy;
       if (seconds < 0) {
         handleTimeEnd();
       } else {
-        timeDuration = Duration(seconds: seconds);
+        answerDuration = Duration(seconds: seconds);
       }
     });
   }
 
   void handleStartTimer() {
-    timeDuration = Duration(seconds: answerDurationInSeconds);
+    answerDuration = Duration(seconds: answerDurationInSeconds);
     countdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => handleCountDown());
   }
@@ -154,27 +146,9 @@ class _NextWordsPage extends State<NextWordsPage> {
             numberWord: listSuccess.length - 1));
   }
 
-  Future<bool?> displayMyDialog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertComponents(
-          questionText: "Bạn có muốn thoát ra ?",
-          yesText: "Có",
-          noText: "Không",
-          flag: isBack,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final isBack = await displayMyDialog(context);
-        return isBack ?? false;
-      },
+    return Container(
       child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
@@ -188,13 +162,15 @@ class _NextWordsPage extends State<NextWordsPage> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      // margin: const EdgeInsets.all(16),
                       height: 350,
                       padding: const EdgeInsets.symmetric(
                           vertical: 16, horizontal: 16),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Color(0xFFFFD740), Color(0xFFF9A825)],
+                          colors: [
+                            Color.fromARGB(255, 230, 209, 24),
+                            Color.fromARGB(255, 227, 241, 28)
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -205,88 +181,16 @@ class _NextWordsPage extends State<NextWordsPage> {
                       ),
                       child: Scaffold(
                         backgroundColor: Colors.transparent,
-                        // height:300,
                         body: Container(
                           child: Center(
                             child: Column(
                               children: [
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () async {
-                                              final isBack =
-                                                  await displayMyDialog(
-                                                      context);
-                                              if (isBack == true) {
-                                                Navigator.pop(context, isBack);
-                                              }
-                                            },
-                                            icon: const Icon(
-                                              Icons.arrow_circle_left_outlined,
-                                              size: 40,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  height: 30,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: LightColors.kLightYellow,
-                                  ),
-                                  child: Stack(
-                                    alignment: Alignment.centerLeft,
-                                    children: [
-                                      Consumer(
-                                        builder: (context, ref, child) {
-                                          // final questions = ref.watch(questionsProvider);
-                                          return FractionallySizedBox(
-                                            alignment: Alignment.centerLeft,
-                                            widthFactor:
-                                                timeDuration.inSeconds /
-                                                    answerDurationInSeconds,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                color: LightColors.kDarkGreen,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Positioned(
-                                        left: 10,
-                                        child: Consumer(
-                                          builder: (context, ref, child) {
-                                            return Text(
-                                                '${timeDuration.inSeconds} seconds');
-                                          },
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        right: 10,
-                                        child: Icon(
-                                          Icons.timer,
-                                          size: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                HeaderGame(
+                                    isBack: isBack,
+                                    context: context,
+                                    answerDuration: answerDuration,
+                                    answerDurationInSeconds:
+                                        answerDurationInSeconds),
                                 Expanded(
                                   flex: 3,
                                   child: Column(
@@ -355,34 +259,7 @@ class _NextWordsPage extends State<NextWordsPage> {
                       ),
                     ),
                   ),
-                  Container(
-                    // Add the line below
-                    margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                    // padding: const EdgeInsets.all(16),
-                    clipBehavior: Clip.hardEdge,
-                    height: 10,
-                    decoration: const BoxDecoration(
-                      color: Color(0xffffe0b2),
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                        bottomLeft: Radius.circular(40),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    // Add the line below
-                    margin: const EdgeInsets.only(left: 35.0, right: 35.0),
-                    clipBehavior: Clip.hardEdge,
-                    height: 10,
-                    decoration: const BoxDecoration(
-                      color: Color(0xfffff3e0),
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 50),
                   Expanded(
                     flex: 1,
                     child: Column(
@@ -413,11 +290,12 @@ class _NextWordsPage extends State<NextWordsPage> {
                                 checkResult();
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.yellow[600],
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 187, 233, 24),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 40, vertical: 14),
                                   textStyle: const TextStyle(fontSize: 24)),
-                              child: const Text('Gửi',
+                              child: const Text('Submit',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,

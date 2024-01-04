@@ -1,23 +1,16 @@
 import 'dart:async';
-import 'package:brain_train_clone_app/screens/languages/common/index.dart';
-// import 'package:flutter/services.dart';
 import 'dart:math';
-// import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:brain_train_clone_app/service/language_game_api.dart'
     show fetchRandomLetter;
-import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // @components
-// import 'package:brain_train_clone_app/components/toast.dart';
 import 'package:brain_train_clone_app/components/languages/notification.dart';
-import 'package:brain_train_clone_app/data/data_onborad/data_languages_1.dart';
-import '../../components/languages/alert.dart';
+import 'package:brain_train_clone_app/components/header_game.dart';
 
 // @common
+import 'package:brain_train_clone_app/screens/languages/common/index.dart';
+import 'package:brain_train_clone_app/constants/mock_data.dart';
 import 'package:brain_train_clone_app/common/light_colors.dart';
 
 class FindWordsPage extends StatefulWidget {
@@ -29,7 +22,7 @@ class FindWordsPage extends StatefulWidget {
 
 class _FindWordsPage extends State<FindWordsPage> {
   String listLetter = 'data/list_letters.json';
-  final int answerDurationInSeconds = 50;
+  final int answerDurationInSeconds = MockData.time;
   List<String> _firstLetter = [""];
   String firstLetter = "";
   String wordInput = "";
@@ -155,27 +148,9 @@ class _FindWordsPage extends State<FindWordsPage> {
             numberWord: listSuccess.length - 1));
   }
 
-  Future<bool?> displayMyDiaglog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertComponents(
-          questionText: "Bạn có muốn thoát ra ?",
-          yesText: "Có",
-          noText: "Không",
-          flag: isBack,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final isBack = await displayMyDiaglog(context);
-        return isBack ?? false;
-      },
+    return Container(
       child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
@@ -189,13 +164,15 @@ class _FindWordsPage extends State<FindWordsPage> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      // margin: const EdgeInsets.all(16),
                       height: 350,
                       padding: const EdgeInsets.symmetric(
                           vertical: 16, horizontal: 16),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Color(0xFFFFD740), Color(0xFFF9A825)],
+                          colors: [
+                            Color.fromARGB(255, 230, 209, 24),
+                            Color.fromARGB(255, 227, 241, 28)
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -204,92 +181,18 @@ class _FindWordsPage extends State<FindWordsPage> {
                           bottomLeft: Radius.circular(20),
                         ),
                       ),
-
                       child: Scaffold(
                         backgroundColor: Colors.transparent,
-                        // height:300,
-
                         body: Container(
                           child: Center(
                             child: Column(
                               children: [
-                                const SizedBox(height: 10),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () async {
-                                              final isBack =
-                                                  await displayMyDiaglog(
-                                                      context);
-                                              if (isBack == true) {
-                                                Navigator.pop(context, isBack);
-                                              }
-                                            },
-                                            icon: const Icon(
-                                              Icons.arrow_circle_left_outlined,
-                                              size: 40,
-                                            ),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  height: 30,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: LightColors.kLightYellow,
-                                  ),
-                                  child: Stack(
-                                    alignment: Alignment.centerLeft,
-                                    children: [
-                                      Consumer(
-                                        builder: (context, ref, child) {
-                                          return FractionallySizedBox(
-                                            alignment: Alignment.centerLeft,
-                                            widthFactor:
-                                                answerDuration.inSeconds /
-                                                    answerDurationInSeconds,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                color: LightColors.kDarkGreen,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Positioned(
-                                        left: 10,
-                                        child: Consumer(
-                                          builder: (context, ref, child) {
-                                            return Text(
-                                                '${answerDuration.inSeconds} seconds');
-                                          },
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        right: 10,
-                                        child: Icon(
-                                          Icons.timer,
-                                          size: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                HeaderGame(
+                                    isBack: isBack,
+                                    context: context,
+                                    answerDuration: answerDuration,
+                                    answerDurationInSeconds:
+                                        answerDurationInSeconds),
                                 Expanded(
                                   flex: 3,
                                   child: Column(
@@ -358,33 +261,7 @@ class _FindWordsPage extends State<FindWordsPage> {
                       ),
                     ),
                   ),
-                  Container(
-                    // Add the line below
-                    margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                    // padding: const EdgeInsets.all(16),
-                    clipBehavior: Clip.hardEdge,
-                    height: 10,
-                    decoration: const BoxDecoration(
-                      color: Color(0xffffe0b2),
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                        bottomLeft: Radius.circular(40),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    // Add the line below
-                    margin: const EdgeInsets.only(left: 35.0, right: 35.0),
-                    clipBehavior: Clip.hardEdge,
-                    height: 10,
-                    decoration: const BoxDecoration(
-                      color: Color(0xfffff3e0),
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 50),
                   Expanded(
                     flex: 1,
                     child: Column(
@@ -417,11 +294,12 @@ class _FindWordsPage extends State<FindWordsPage> {
                                 checkResult();
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.yellow[600],
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 187, 233, 24),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 40, vertical: 14),
                                   textStyle: const TextStyle(fontSize: 24)),
-                              child: const Text('Gửi',
+                              child: const Text('Submit',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,

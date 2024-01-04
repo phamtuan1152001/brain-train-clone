@@ -21,14 +21,6 @@ class _LanguagePage extends State<LanguagePage> {
           width: double.infinity,
           height: double.infinity,
           color: HexColor("#fffffe"),
-          // decoration: const BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [
-          //       Colors.white,
-          //       Color(0xE6FFCD4D),
-          //     ])),
           child: ListView(
             children: [
               Padding(

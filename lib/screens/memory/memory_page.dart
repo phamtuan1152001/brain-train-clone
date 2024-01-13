@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../../router/routers.dart';
+
 class MemoryPage extends StatefulWidget {
   const MemoryPage({super.key});
 
@@ -18,16 +20,32 @@ class _MemoryPage extends State<MemoryPage> {
           height: double.infinity,
           color: HexColor("#fffffe"),
           child: ListView(
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text(
-                  'CHỌN TRÒ CHƠI MemoryPage',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: 25, letterSpacing: 1),
-                ),
-              )
+                  padding: EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(RouteGenerator.memoryOneLevel);
+                        },
+                        child: const Text('Game 1'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
+                        },
+                        child: const Text('Game 2'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
+                        },
+                        child: const Text('Game 2'),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),

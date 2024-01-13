@@ -2,6 +2,7 @@ import 'package:brain_train_clone_app/screens/attention/attention_page.dart';
 import 'package:brain_train_clone_app/screens/home/home_page.dart';
 import 'package:brain_train_clone_app/screens/languages/language_page.dart';
 import 'package:brain_train_clone_app/screens/math/math_page.dart';
+import 'package:brain_train_clone_app/screens/memory/game1/memory_one.dart';
 import 'package:brain_train_clone_app/screens/memory/memory_page.dart';
 
 // list page of languages game
@@ -16,6 +17,8 @@ import 'package:brain_train_clone_app/screens/math/game1_screens/g1_congrat_scre
 import 'package:brain_train_clone_app/screens/math/game2_screens/g2_levels_screen.dart';
 import 'package:brain_train_clone_app/screens/math/game2_screens/game2_screen.dart';
 import 'package:brain_train_clone_app/screens/math/game2_screens/g2_congrat_screen.dart';
+
+import '../screens/memory/game1/memory_one_levels.dart';
 
 class RouteGenerator {
   const RouteGenerator._();
@@ -35,6 +38,10 @@ class RouteGenerator {
 
   // memory page
   static const memoryPage = '/memoryPage';
+  static const memoryOneLevel = '/memoryOneLevel';
+  static const memoryOne = '/memoryOne';
+  static const memoryTwo = '/memoryTwo';
+  static const memoryThree = '/memoryThree';
 
   // math page
   static const mathPage = '/mathPage';
@@ -63,5 +70,8 @@ class RouteGenerator {
     sumLevels: (context) => const Math2LevelsScreen(),
     sum: (context) => const Math2Screen(),
     sumResult: (context) => const Math2CongratScreen(),
+
+    // list game of memory
+    memoryOneLevel: (context) => const MemoryOneLevel(),
   };
 }

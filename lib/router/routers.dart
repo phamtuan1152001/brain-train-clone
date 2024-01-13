@@ -2,7 +2,7 @@ import 'package:brain_train_clone_app/screens/attention/attention_page.dart';
 import 'package:brain_train_clone_app/screens/home/home_page.dart';
 import 'package:brain_train_clone_app/screens/languages/language_page.dart';
 import 'package:brain_train_clone_app/screens/math/math_page.dart';
-import 'package:brain_train_clone_app/screens/memory/game1/memory_one.dart';
+import 'package:brain_train_clone_app/screens/memory/game2/memory_two.dart';
 import 'package:brain_train_clone_app/screens/memory/memory_page.dart';
 
 // list page of languages game
@@ -39,7 +39,6 @@ class RouteGenerator {
   // memory page
   static const memoryPage = '/memoryPage';
   static const memoryOneLevel = '/memoryOneLevel';
-  static const memoryOne = '/memoryOne';
   static const memoryTwo = '/memoryTwo';
   static const memoryThree = '/memoryThree';
 
@@ -73,5 +72,6 @@ class RouteGenerator {
 
     // list game of memory
     memoryOneLevel: (context) => const MemoryOneLevel(),
+    memoryTwo: (context) => const MemoryTwo(),
   };
 }

@@ -3,6 +3,7 @@ import 'package:brain_train_clone_app/screens/home/home_page.dart';
 import 'package:brain_train_clone_app/screens/languages/language_page.dart';
 import 'package:brain_train_clone_app/screens/math/math_page.dart';
 import 'package:brain_train_clone_app/screens/memory/game2/memory_two.dart';
+import 'package:brain_train_clone_app/screens/memory/game3/game_three.dart';
 import 'package:brain_train_clone_app/screens/memory/memory_page.dart';
 
 // list page of languages game
@@ -73,5 +74,6 @@ class RouteGenerator {
     // list game of memory
     memoryOneLevel: (context) => const MemoryOneLevel(),
     memoryTwo: (context) => const MemoryTwo(),
+    memoryThree: (context) => const MemoryThree(),
   };
 }

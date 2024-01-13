@@ -41,9 +41,10 @@ class _MemoryPage extends State<MemoryPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
+                          Navigator.of(context)
+                              .pushNamed(RouteGenerator.memoryThree);
                         },
-                        child: const Text('Game 2'),
+                        child: const Text('Game 3'),
                       ),
                     ],
                   ))

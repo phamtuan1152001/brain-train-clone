@@ -39,13 +39,13 @@ class _MemoryPage extends State<MemoryPage> {
                         },
                         child: const Text('Game 2'),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(RouteGenerator.memoryThree);
-                        },
-                        child: const Text('Game 3'),
-                      ),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     Navigator.of(context)
+                      //         .pushNamed(RouteGenerator.memoryThree);
+                      //   },
+                      //   child: const Text('Game 3'),
+                      // ),
                     ],
                   ))
             ],

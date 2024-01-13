@@ -1,4 +1,4 @@
-import 'package:brain_train_clone_app/screens/attention/attention_page.dart';
+// import 'package:brain_train_clone_app/screens/attention/attention_page.dart';
 import 'package:brain_train_clone_app/screens/home/home_page.dart';
 import 'package:brain_train_clone_app/screens/languages/language_page.dart';
 import 'package:brain_train_clone_app/screens/math/math_page.dart';
@@ -54,7 +54,7 @@ class RouteGenerator {
   static final routes = {
     homePage: (context) => const HomePage(),
     languagePage: (context) => const LanguagePage(),
-    attentionPage: (context) => const AttentionPage(),
+    // attentionPage: (context) => const AttentionPage(),
     memoryPage: (context) => const MemoryPage(),
     mathPage: (context) => const MathPage(),
 

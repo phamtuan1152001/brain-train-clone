@@ -4,6 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:brain_train_clone_app/components/card_item.dart';
 import 'package:brain_train_clone_app/constants/mock_data.dart';
 
+import '../../router/routers.dart';
+
 class LanguagePage extends StatefulWidget {
   const LanguagePage({super.key});
 
@@ -23,6 +25,22 @@ class _LanguagePage extends State<LanguagePage> {
           color: HexColor("#fffffe"),
           child: ListView(
             children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/homepage'));
+                      Navigator.of(context).pushNamed(RouteGenerator.homePage);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_circle_left_outlined,
+                      size: 40,
+                    ),
+                    color: Colors.black,
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Text(

@@ -81,7 +81,7 @@ class _HomePage extends State<HomePage> {
                             onPressed: () {
                               Navigator.of(context).pushNamed(card['pathName']);
                             },
-                            child: const Text('Start playing'),
+                            child: const Text('Bắt đầu chơi'),
                           ),
                         ],
                       ),

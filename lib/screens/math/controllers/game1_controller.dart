@@ -37,6 +37,10 @@ class Game1Controller extends GetxController
 
   int playTime = 60;
 
+  // to display the count down timer at UI
+  RxInt _timeLeft = 60.obs;
+  RxInt get timeLeft => _timeLeft;
+
   bool consecutive = false;
   int consecutiveCorrectTimes = 0;
 
@@ -61,6 +65,7 @@ class Game1Controller extends GetxController
     // when 60s ends, go to the next question
     _animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
+    _countDown();
     super.onInit();
   }
 
@@ -69,6 +74,18 @@ class Game1Controller extends GetxController
     _animationController.dispose();
     _pageController.dispose();
     super.onClose();
+  }
+
+  // timer
+  void _countDown() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_timeLeft > 0) {
+        _timeLeft--;
+      } else {
+        timer.cancel();
+        Get.to(() => const Math1CongratScreen());
+      }
+    });
   }
 
   // generate question set to display in the game
@@ -111,7 +128,6 @@ class Game1Controller extends GetxController
     _selectedAns = selectedInx;
 
     // calculate total reponse time on the whole question set
-    _responseTime = (animation.value * playTime).round();
     _totalResponseTime += _responseTime;
 
     // check which option is correct
@@ -132,6 +148,7 @@ class Game1Controller extends GetxController
       consecutive = false;
       // for each incorrect ans => minus play time by 1s
       playTime -= 1;
+      _timeLeft -= 1;
       Fluttertoast.showToast(
         msg: '-1 giây',
         toastLength: Toast.LENGTH_SHORT,
@@ -152,6 +169,7 @@ class Game1Controller extends GetxController
     // 3 correct ans in a row => add 10s to play time
     if (consecutiveCorrectTimes == 3) {
       playTime += 10;
+      _timeLeft += 10;
       consecutiveCorrectTimes = 0;
       Fluttertoast.showToast(
         msg: '+10 giây',

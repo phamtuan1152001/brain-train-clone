@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/game1_controller.dart';
 import '../../models/game1_data_generator.dart';
-import 'g1_progress_bar.dart';
 import 'g1_question_card.dart';
 
 class Body extends StatelessWidget {
@@ -34,16 +33,12 @@ class Body extends StatelessWidget {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Image.asset(
-                            'assets/math/medal.png',
-                            scale: 2.1,
-                          ),
                           Obx(
                             () => Text.rich(
                               TextSpan(
-                                text: ' ĐIỂM SỐ ',
+                                text: 'ĐIỂM SỐ ',
                                 style: const TextStyle(
                                   color: Color.fromRGBO(139, 148, 188, 1),
                                   fontSize: 20,
@@ -60,16 +55,31 @@ class Body extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Obx(
+                            () => Text.rich(
+                              TextSpan(
+                                text: 'THỜI GIAN CÒN LẠI ',
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(139, 148, 188, 1),
+                                  fontSize: 20,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${_questionController.timeLeft}",
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(139, 148, 188, 1),
+                                      fontSize: 30,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ],
-              ),
-              SizedBox(height: scrHeight / 40),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: ProgressBar(),
               ),
               SizedBox(height: scrHeight / 40),
               Padding(

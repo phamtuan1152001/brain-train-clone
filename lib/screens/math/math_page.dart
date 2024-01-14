@@ -11,6 +11,7 @@ class MathPage extends StatefulWidget {
 class _MathPage extends State<MathPage> {
   @override
   Widget build(BuildContext context) {
+    double scrHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -26,20 +27,30 @@ class _MathPage extends State<MathPage> {
         ),
       ),
       body: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteGenerator.smaller);
-              },
-              child: const Text('Game 1'),
+            const Text(
+              "Select a Math Game",
+              style: TextStyle(fontSize: 28),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
-              },
-              child: const Text('Game 2'),
+            SizedBox(height: scrHeight / 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(RouteGenerator.smaller);
+                  },
+                  child: const Text('Game 1'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
+                  },
+                  child: const Text('Game 2'),
+                ),
+              ],
             ),
           ],
         ),

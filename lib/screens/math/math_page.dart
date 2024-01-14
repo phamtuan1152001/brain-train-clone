@@ -20,7 +20,7 @@ class _MathPage extends State<MathPage> {
             Navigator.of(context).pushNamed(RouteGenerator.homePage);
           },
           child: Image.asset(
-            'assets/math/go-back.png',
+            'assets/math/go-back-black.png',
             scale: 2.5,
           ),
         ),

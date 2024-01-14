@@ -13,41 +13,54 @@ class MemoryPage extends StatefulWidget {
 class _MemoryPage extends State<MemoryPage> {
   @override
   Widget build(BuildContext context) {
+    double scrHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(RouteGenerator.homePage);
+          },
+          child: Image.asset(
+            'assets/math/go-back-black.png',
+            scale: 2.5,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Container(
           width: double.infinity,
           height: double.infinity,
           color: HexColor("#fffffe"),
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(RouteGenerator.memoryOneLevel);
-                        },
-                        child: const Text('Game 1'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(RouteGenerator.memoryTwo);
-                        },
-                        child: const Text('Game 2'),
-                      ),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     Navigator.of(context)
-                      //         .pushNamed(RouteGenerator.memoryThree);
-                      //   },
-                      //   child: const Text('Game 3'),
-                      // ),
-                    ],
-                  ))
+              const Text(
+                "Select a Memory Game",
+                style: TextStyle(
+                  fontSize: 28,
+                ),
+              ),
+              SizedBox(height: scrHeight / 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(RouteGenerator.memoryOneLevel);
+                    },
+                    child: const Text('Game 1'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RouteGenerator.memoryTwo);
+                    },
+                    child: const Text('Game 2'),
+                  )
+                ],
+              ),
             ],
           ),
         ),

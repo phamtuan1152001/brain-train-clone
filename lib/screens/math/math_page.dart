@@ -42,13 +42,13 @@ class _MathPage extends State<MathPage> {
                   onPressed: () {
                     Navigator.of(context).pushNamed(RouteGenerator.smaller);
                   },
-                  child: const Text('Game 1'),
+                  child: const Text('Smaller Number'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed(RouteGenerator.sumLevels);
                   },
-                  child: const Text('Game 2'),
+                  child: const Text('Sum'),
                 ),
               ],
             ),

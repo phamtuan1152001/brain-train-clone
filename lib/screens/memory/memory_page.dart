@@ -51,13 +51,13 @@ class _MemoryPage extends State<MemoryPage> {
                       Navigator.of(context)
                           .pushNamed(RouteGenerator.memoryOneLevel);
                     },
-                    child: const Text('Game 1'),
+                    child: const Text('Position Recall'),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(RouteGenerator.memoryTwo);
                     },
-                    child: const Text('Game 2'),
+                    child: const Text('New Picture'),
                   )
                 ],
               ),

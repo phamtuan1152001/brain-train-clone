@@ -1,8 +1,8 @@
 import 'package:brain_train_clone_app/screens/memory/game1/data/data.dart';
 import 'package:brain_train_clone_app/screens/memory/game1/memory_one.dart';
+import 'package:brain_train_clone_app/screens/memory/memory_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../home/home_page.dart';
 import 'widgets/level_card.dart';
 
 class MemoryOneLevel extends StatefulWidget {
@@ -13,8 +13,6 @@ class MemoryOneLevel extends StatefulWidget {
 }
 
 class _LevelScreenState extends State<MemoryOneLevel> {
-  // int _isOpen;
-
   final isOPenLevel _isOpenLevel = isOPenLevel();
 
   @override
@@ -33,9 +31,9 @@ class _LevelScreenState extends State<MemoryOneLevel> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => const MemoryPage()));
                     },
-                    icon: Icon(Icons.arrow_back_ios)),
+                    icon: const Icon(Icons.arrow_back_ios)),
                 const SizedBox(
                   width: 10,
                 ),
@@ -58,7 +56,6 @@ class _LevelScreenState extends State<MemoryOneLevel> {
                 // starts: 3,
                 isOpen: index <= _isOpenLevel.isOpen(),
                 onPressed: () {
-                  print(_isOpenLevel.isOpen());
                   int chooseLevel = index + 1;
                   if (chooseLevel == 1) {
                     Navigator.push(
@@ -79,11 +76,6 @@ class _LevelScreenState extends State<MemoryOneLevel> {
                           builder: (context) => MemoryOne(dataLevel.three)),
                     );
                   }
-                  print(" Click me");
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => const HomePage()),
-                  // );
                 },
               );
             },
